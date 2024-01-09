@@ -54,7 +54,6 @@ jobs:
         device: all
         gitAuthor: ${{ github.actor }}
         gitBranch: ${{ github.ref }}
-        outputDirectory: ${{ github.workspace }}/tmp/artifacts
         gitHubAccessToken: ${{ secrets.GITHUB_TOKEN }}
         sha: ${{ github.sha }}
         slackWebhookUrl: ${{ secrets.LIGHTHOUSE_CHECK_WEBHOOK_URL }}
