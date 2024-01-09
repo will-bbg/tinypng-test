@@ -1,6 +1,6 @@
 name: 🚀 Deploy to Dev on push
 on: 
-  push:
+  pull_request:
     paths:
       - 'site/images/**'
 jobs:
