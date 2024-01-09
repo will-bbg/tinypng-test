@@ -1,9 +1,10 @@
+name: 🚀 Deploy to BGSandbox on merge
 on:
-  pull_request:
+  push:
     paths:
       - 'site/images/**'
+  pull_request:
       
-name: 🚀 Deploy to BGSandbox on merge
 jobs:
   compress:
     runs-on: ubuntu-latest
