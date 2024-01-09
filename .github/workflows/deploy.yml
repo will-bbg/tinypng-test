@@ -27,7 +27,7 @@ jobs:
         username: developer@bgsandbox.com
         password: ${{ secrets.ftp_password }}
         port: 21
-        local-dir: ./_site/
+        local-dir: ./site/
         server-dir: public_html/tinypng-test/
         exclude: |
           **/.DS_Store
