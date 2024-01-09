@@ -50,7 +50,7 @@ jobs:
     - name: 👀 Lighthouse
       uses: foo-software/lighthouse-check-action@master
       with:
-        urls: 'https://bgsandbox.com/tinypng-test/index.html'
+        urls: 'https://bgsandbox.com/tinypng-test/index.html,https://bgsandbox.com/tinypng-test/test.html'
         device: all
         gitAuthor: ${{ github.actor }}
         gitBranch: ${{ github.ref }}
