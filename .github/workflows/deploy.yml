@@ -48,3 +48,8 @@ jobs:
       uses: foo-software/lighthouse-check-action@master
       with:
         urls: 'https://bgsandbox.com/tinypng-test/index.html'
+        device: all
+        gitAuthor: ${{ github.actor }}
+        gitBranch: ${{ github.ref }}
+        gitHubAccessToken: ${{ secrets.GITHUB_TOKEN }}
+        slackWebhookUrl: ${{ secrets.LIGHTHOUSE_CHECK_WEBHOOK_URL }}
