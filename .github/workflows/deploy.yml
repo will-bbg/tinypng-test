@@ -15,6 +15,7 @@ jobs:
           api_key: ${{ secrets.TINIFY_API_KEY }}  
   web-deploy:
     name: 🎉 Deploy
+    needs: compress
     runs-on: ubuntu-latest
     steps:
     - name: 🚚 Get latest code
