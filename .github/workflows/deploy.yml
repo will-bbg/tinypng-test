@@ -6,7 +6,7 @@ on:
       
 name: 🚀 Deploy to BGSandbox on merge
 jobs:
-  compress:
+  tinypng-compress:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -17,7 +17,7 @@ jobs:
           api_key: ${{ secrets.TINIFY_API_KEY }}
   web-deploy:
     name: 🎉 Deploy
-    needs: compress
+    needs: tinypng-compress
     runs-on: ubuntu-latest
     steps:
     - name: 🚚 Get latest code
@@ -50,7 +50,7 @@ jobs:
     - name: 👀 Lighthouse
       uses: foo-software/lighthouse-check-action@master
       with:
-        urls: 'https://bgsandbox.com/tinypng-test/index.html'
+        urls: 'https://bgsandbox.com/tinypng-test/index.html,https://bgsandbox.com/tinypng-test/test.html'
         device: all
         gitAuthor: ${{ github.actor }}
         gitBranch: ${{ github.ref }}
