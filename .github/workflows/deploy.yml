@@ -1,10 +1,10 @@
+name: 🚀 Deploy to BGSandbox on merge
 on:
   push:
-  pull_request:
     paths:
       - 'site/images/**'
+  pull_request:
       
-name: 🚀 Deploy to BGSandbox on merge
 jobs:
   compress:
     runs-on: ubuntu-latest
@@ -15,6 +15,7 @@ jobs:
       - uses: namoscato/action-tinify@v1
         with:
           api_key: ${{ secrets.TINIFY_API_KEY }}
+          commit_message: 'TinyPNG Compression Active'
   web-deploy:
     name: 🎉 Deploy
     needs: compress
@@ -50,7 +51,7 @@ jobs:
     - name: 👀 Lighthouse
       uses: foo-software/lighthouse-check-action@master
       with:
-        urls: 'https://bgsandbox.com/tinypng-test/index.html'
+        urls: 'https://bgsandbox.com/tinypng-test/index.html,https://bgsandbox.com/tinypng-test/test.html'
         device: all
         gitAuthor: ${{ github.actor }}
         gitBranch: ${{ github.ref }}
