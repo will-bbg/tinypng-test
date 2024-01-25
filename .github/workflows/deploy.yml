@@ -1,26 +1,15 @@
-name: 🚀 New Deploy Script
-on:
-  pull_request:
-    paths:
-      - 'site/images/**'
+name: Deploy
 
+on:
+  workflow_run:
+    workflows: ["Compress Images"]
+    types:
+      - completed
 
       
 jobs:
-  compress:
-    name: 🗜️ Compress Images
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.head_ref }}
-      - uses: namoscato/action-tinify@v1
-        with:
-          api_key: ${{ secrets.TINIFY_API_KEY }}
-
   web-deploy:
     name: 🎉 Deploy
-    needs: compress
     runs-on: ubuntu-latest
     steps:
     - name: 🚚 Get latest code
@@ -42,5 +31,21 @@ jobs:
           **/node_modules/**
           **/assets/sass/**
           **/uswds/img/material-icons-deprecated/**
-          **/uswds/img/material-icons/*         
-
+          **/uswds/img/material-icons/*
+  lighthouse:
+    name: 👀 Lighthouse Scan
+    runs-on: ubuntu-latest
+    needs: web-deploy
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@master
+    - name: 👀 Lighthouse
+      uses: foo-software/lighthouse-check-action@master
+      with:
+        urls: 'https://bgsandbox.com/tinypng-test/index.html,https://bgsandbox.com/tinypng-test/test.html'
+        device: all
+        gitAuthor: ${{ github.actor }}
+        gitBranch: ${{ github.ref }}
+        gitHubAccessToken: ${{ secrets.GITHUB_TOKEN }}
+        sha: ${{ github.sha }}
+        slackWebhookUrl: ${{ secrets.LIGHTHOUSE_CHECK_WEBHOOK_URL }}          
