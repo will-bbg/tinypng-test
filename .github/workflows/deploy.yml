@@ -3,7 +3,7 @@ on:
   push:
     paths:
       - 'site/images/**'
-  pull_request:
+      
       
 jobs:
   compress:
