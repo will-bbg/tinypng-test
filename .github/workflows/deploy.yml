@@ -49,3 +49,4 @@ jobs:
         gitHubAccessToken: ${{ secrets.GITHUB_TOKEN }}
         sha: ${{ github.sha }}
         slackWebhookUrl: ${{ secrets.LIGHTHOUSE_CHECK_WEBHOOK_URL }}
+                  
