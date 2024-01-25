@@ -1,24 +1,15 @@
-name: 🚀 Deploy to BGSandbox on merge
+name: Deploy
+
 on:
-  push:
-    paths:
-      - 'site/images/**'
-  pull_request:
+  workflow_run:
+    workflows: ["Compress Images"]
+    types:
+      - completed
+
       
 jobs:
-  compress:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.head_ref }}
-      - uses: namoscato/action-tinify@v1
-        with:
-          api_key: ${{ secrets.TINIFY_API_KEY }}
-          commit_message: 'TinyPNG Compression Active'
   web-deploy:
     name: 🎉 Deploy
-    needs: compress
     runs-on: ubuntu-latest
     steps:
     - name: 🚚 Get latest code
@@ -42,7 +33,7 @@ jobs:
           **/uswds/img/material-icons-deprecated/**
           **/uswds/img/material-icons/*
   lighthouse:
-    name: Lighthouse Scan
+    name: 👀 Lighthouse Scan
     runs-on: ubuntu-latest
     needs: web-deploy
     steps:
@@ -57,4 +48,4 @@ jobs:
         gitBranch: ${{ github.ref }}
         gitHubAccessToken: ${{ secrets.GITHUB_TOKEN }}
         sha: ${{ github.sha }}
-        slackWebhookUrl: ${{ secrets.LIGHTHOUSE_CHECK_WEBHOOK_URL }}
+        slackWebhookUrl: ${{ secrets.LIGHTHOUSE_CHECK_WEBHOOK_URL }}          
