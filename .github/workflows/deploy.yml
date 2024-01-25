@@ -1,9 +1,12 @@
 name: 🚀 New Deploy Script
 on:
-  pull_request:
+  push:
     paths:
       - 'site/images/**'
-
+  pull_request:
+    paths:
+      - 'site/images/**'    
+      
       
 jobs:
   compress:
