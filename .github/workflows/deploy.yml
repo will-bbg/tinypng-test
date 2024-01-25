@@ -1,9 +1,9 @@
 name: 🚀 New Deploy Script
 on:
-  push:
+  pull_request:
     paths:
       - 'site/images/**'
-  pull_request:
+
       
 jobs:
   compress:
