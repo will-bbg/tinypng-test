@@ -2,7 +2,8 @@ name: Deploy
 
 on:
   pull_request:
-    types: [ labeled, edited ]
+    types: [ labeled ]
+  push: 
 
 jobs:
   web-deploy:
