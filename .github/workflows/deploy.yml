@@ -1,15 +1,16 @@
 name: Deploy
 
 on:
-  workflow_run:
-    workflows: ["Compress Images"]
-    types:
-      - completed
-
+  pull_request:
+    types: 
+      - synchronize
+      - opened
+      - labeled
       
 jobs:
   web-deploy:
     name: 🎉 Deploy
+    if: contains(github.event.pull_request.labels.*.name, 'ready for review')
     runs-on: ubuntu-latest
     steps:
     - name: 🚚 Get latest code
@@ -49,4 +50,4 @@ jobs:
         gitHubAccessToken: ${{ secrets.GITHUB_TOKEN }}
         sha: ${{ github.sha }}
         slackWebhookUrl: ${{ secrets.LIGHTHOUSE_CHECK_WEBHOOK_URL }}
-                  
+        
