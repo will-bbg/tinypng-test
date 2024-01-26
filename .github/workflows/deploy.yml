@@ -4,7 +4,6 @@ on:
   pull_request:
     types: 
       - synchronize
-      - opened
       - labeled
       
 jobs:
@@ -60,7 +59,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run which-files-changed
-        uses: BuddhikaGeasman/which-files-changed@v1
+        uses: BuddhikaGeasman/which-files-changed
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           pr-comment: 'true' # or 'false' to control where to add the changes              
