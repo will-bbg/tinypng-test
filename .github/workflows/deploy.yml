@@ -60,7 +60,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run which-files-changed
-        uses: BuddhikaGeasman/which-files-changed
+        uses: BuddhikaGeasman/which-files-changed@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           pr-comment: 'true' # or 'false' to control where to add the changes              
