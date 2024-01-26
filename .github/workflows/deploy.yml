@@ -48,4 +48,17 @@ jobs:
         gitHubAccessToken: ${{ secrets.GITHUB_TOKEN }}
         sha: ${{ github.sha }}
         slackWebhookUrl: ${{ secrets.LIGHTHOUSE_CHECK_WEBHOOK_URL }}
-                  
+
+  identify-changed-files:
+    name: 🖊️ Changed Files
+    needs: lighthouse
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run which-files-changed
+        uses: BuddhikaGeasman/which-files-changed@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pr-comment: 'true' # or 'false' to control where to add the changes              
